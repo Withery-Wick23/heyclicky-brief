@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HeyClicky × Construction — Product Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --accent: #e8ff47;
+    --accent2: #ff6b35;
+    --text: #f0f0f0;
+    --muted: #888;
+    --muted2: #555;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘DM Mono’, monospace;
+font-size: 14px;
+line-height: 1.7;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);
+pointer-events: none;
+z-index: 999;
+opacity: 0.4;
+}
+
+.container {
+max-width: 780px;
+margin: 0 auto;
+padding: 60px 32px 120px;
+}
+
+/* Header */
+.header {
+border-bottom: 1px solid var(–border);
+padding-bottom: 40px;
+margin-bottom: 60px;
+animation: fadeUp 0.6s ease both;
+}
+
+.tag-row {
+display: flex;
+gap: 10px;
+margin-bottom: 28px;
+flex-wrap: wrap;
+}
+
+.tag {
+font-family: ‘DM Mono’, monospace;
+font-size: 10px;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+padding: 5px 12px;
+border: 1px solid var(–border);
+color: var(–muted);
+border-radius: 2px;
+}
+
+.tag.accent { border-color: var(–accent); color: var(–accent); }
+.tag.accent2 { border-color: var(–accent2); color: var(–accent2); }
+
+h1 {
+font-family: ‘Syne’, sans-serif;
+font-size: clamp(32px, 6vw, 52px);
+font-weight: 800;
+line-height: 1.05;
+letter-spacing: -0.02em;
+margin-bottom: 20px;
+}
+
+h1 span.hl { color: var(–accent); }
+
+.subtitle {
+color: var(–muted);
+font-size: 13px;
+max-width: 500px;
+line-height: 1.8;
+}
+
+/* Section */
+.section {
+margin-bottom: 56px;
+animation: fadeUp 0.6s ease both;
+}
+
+.section:nth-child(2) { animation-delay: 0.1s; }
+.section:nth-child(3) { animation-delay: 0.2s; }
+.section:nth-child(4) { animation-delay: 0.3s; }
+.section:nth-child(5) { animation-delay: 0.4s; }
+.section:nth-child(6) { animation-delay: 0.5s; }
+
+.section-label {
+font-size: 10px;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–accent);
+margin-bottom: 16px;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.section-label::after {
+content: ‘’;
+flex: 1;
+height: 1px;
+background: var(–border);
+max-width: 60px;
+}
+
+h2 {
+font-family: ‘Syne’, sans-serif;
+font-size: 22px;
+font-weight: 700;
+margin-bottom: 16px;
+letter-spacing: -0.01em;
+}
+
+p {
+color: #c8c8c8;
+margin-bottom: 14px;
+max-width: 640px;
+}
+
+/* Pain block */
+.pain-block {
+background: var(–surface);
+border: 1px solid var(–border);
+border-left: 3px solid var(–accent2);
+padding: 24px 28px;
+margin: 24px 0;
+border-radius: 0 4px 4px 0;
+}
+
+.pain-block .label {
+font-size: 10px;
+text-transform: uppercase;
+letter-spacing: 0.12em;
+color: var(–accent2);
+margin-bottom: 10px;
+}
+
+.pain-block p {
+color: #d0d0d0;
+margin: 0;
+font-style: italic;
+}
+
+/* Flow steps */
+.flow {
+display: flex;
+flex-direction: column;
+gap: 0;
+margin: 24px 0;
+}
+
+.flow-step {
+display: grid;
+grid-template-columns: 48px 1fr;
+gap: 0 20px;
+position: relative;
+}
+
+.flow-step:not(:last-child) .step-line {
+position: absolute;
+left: 23px;
+top: 36px;
+bottom: -16px;
+width: 1px;
+background: var(–border);
+}
+
+.step-num {
+width: 36px;
+height: 36px;
+border: 1px solid var(–border);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 11px;
+color: var(–muted);
+flex-shrink: 0;
+margin-top: 4px;
+background: var(–surface);
+position: relative;
+z-index: 1;
+}
+
+.flow-step.active .step-num {
+border-color: var(–accent);
+color: var(–accent);
+background: rgba(232, 255, 71, 0.05);
+}
+
+.step-content {
+padding-bottom: 32px;
+}
+
+.step-title {
+font-family: ‘Syne’, sans-serif;
+font-size: 14px;
+font-weight: 600;
+margin-bottom: 6px;
+color: var(–text);
+}
+
+.step-desc {
+color: var(–muted);
+font-size: 13px;
+margin: 0;
+max-width: none;
+}
+
+/* Feature card */
+.feature-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 16px;
+margin: 24px 0;
+}
+
+@media (max-width: 560px) {
+.feature-grid { grid-template-columns: 1fr; }
+}
+
+.feature-card {
+background: var(–surface);
+border: 1px solid var(–border);
+padding: 20px;
+border-radius: 4px;
+transition: border-color 0.2s;
+}
+
+.feature-card:hover { border-color: var(–accent); }
+
+.feature-icon {
+font-size: 20px;
+margin-bottom: 12px;
+}
+
+.feature-title {
+font-family: ‘Syne’, sans-serif;
+font-size: 13px;
+font-weight: 700;
+margin-bottom: 8px;
+color: var(–text);
+}
+
+.feature-desc {
+font-size: 12px;
+color: var(–muted);
+line-height: 1.6;
+margin: 0;
+}
+
+/* Quote */
+.quote-block {
+background: rgba(232, 255, 71, 0.03);
+border: 1px solid rgba(232, 255, 71, 0.15);
+padding: 28px 32px;
+margin: 28px 0;
+border-radius: 4px;
+}
+
+.quote-block p {
+font-size: 15px;
+color: var(–text);
+font-style: italic;
+margin: 0;
+line-height: 1.8;
+}
+
+.quote-block .attribution {
+margin-top: 12px;
+font-size: 11px;
+color: var(–muted);
+font-style: normal;
+}
+
+/* Stats row */
+.stats-row {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 16px;
+margin: 24px 0;
+}
+
+@media (max-width: 480px) {
+.stats-row { grid-template-columns: 1fr 1fr; }
+}
+
+.stat-card {
+background: var(–surface);
+border: 1px solid var(–border);
+padding: 20px;
+border-radius: 4px;
+text-align: center;
+}
+
+.stat-num {
+font-family: ‘Syne’, sans-serif;
+font-size: 26px;
+font-weight: 800;
+color: var(–accent);
+display: block;
+margin-bottom: 6px;
+}
+
+.stat-label {
+font-size: 11px;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 0.08em;
+}
+
+/* Scenario box */
+.scenario {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 4px;
+overflow: hidden;
+margin: 24px 0;
+}
+
+.scenario-header {
+background: #1e1e1e;
+padding: 12px 20px;
+font-size: 11px;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 0.1em;
+border-bottom: 1px solid var(–border);
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(–accent); display: inline-block; }
+
+.scenario-body {
+padding: 24px 28px;
+}
+
+.dialogue {
+display: flex;
+flex-direction: column;
+gap: 14px;
+}
+
+.line {
+display: flex;
+gap: 14px;
+align-items: flex-start;
+}
+
+.speaker {
+font-size: 10px;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+min-width: 60px;
+padding-top: 2px;
+flex-shrink: 0;
+}
+
+.speaker.user { color: var(–muted2); }
+.speaker.clicky { color: var(–accent); }
+
+.bubble {
+font-size: 13px;
+line-height: 1.6;
+color: #d0d0d0;
+padding: 10px 14px;
+border-radius: 4px;
+border: 1px solid var(–border);
+}
+
+.bubble.clicky-bubble {
+background: rgba(232, 255, 71, 0.04);
+border-color: rgba(232, 255, 71, 0.12);
+color: #e0e0e0;
+}
+
+/* CTA / author block */
+.author-block {
+margin-top: 64px;
+padding-top: 40px;
+border-top: 1px solid var(–border);
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+flex-wrap: wrap;
+gap: 24px;
+}
+
+.author-name {
+font-family: ‘Syne’, sans-serif;
+font-size: 18px;
+font-weight: 700;
+margin-bottom: 4px;
+}
+
+.author-meta {
+font-size: 12px;
+color: var(–muted);
+line-height: 1.8;
+}
+
+.cta-link {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: var(–accent);
+color: #0e0e0e;
+font-family: ‘Syne’, sans-serif;
+font-size: 13px;
+font-weight: 700;
+padding: 12px 24px;
+border-radius: 2px;
+text-decoration: none;
+letter-spacing: 0.02em;
+transition: opacity 0.2s;
+}
+
+.cta-link:hover { opacity: 0.85; }
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+hr.divider {
+border: none;
+border-top: 1px solid var(–border);
+margin: 48px 0;
+}
+</style>
+
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+
+  <div class="header">
+    <div class="tag-row">
+      <span class="tag accent">Product Brief</span>
+      <span class="tag">HeyClicky × Construction</span>
+      <span class="tag accent2">Untapped Vertical</span>
+    </div>
+    <h1>The site engineer<br>has no <span class="hl">AI buddy.</span><br>Yet.</h1>
+    <p class="subtitle">A use case brief for HeyClicky — written by someone who has lived the problem firsthand on Nigerian construction sites.</p>
+  </div>
+
+  <!-- Section 1: The Problem -->
+
+  <div class="section">
+    <div class="section-label">01 — The Problem</div>
+    <h2>Documentation is killing site engineers</h2>
+    <p>Every day on an active construction site, a QS or site engineer is managing one of the most information-dense jobs in the world — material quantities, structural drawings, casting records, labour logs — often across multiple supervisors and with zero standardisation.</p>
+
+```
+<div class="pain-block">
+  <div class="label">Real workflow — Ministry of Works, Nigeria</div>
+  <p>"I'd capture everything in phone notes on-site — quantities of columns cast, beams poured, stairs completed. Then I'd go back to the office and rewrite it all from scratch into reports. Not once. Multiple times. Each supervisor wanted their own version with no shared template. Same data, different documents, every single day."</p>
+</div>
+
+<p>This isn't a Nigerian problem. It's a global construction industry problem. And it is completely unsolved.</p>
+```
+
+  </div>
+
+  <!-- Section 2: Market -->
+
+  <div class="section">
+    <div class="section-label">02 — Why This Market</div>
+    <h2>Millions of professionals. Zero AI tooling.</h2>
+
+```
+<div class="stats-row">
+  <div class="stat-card">
+    <span class="stat-num">8M+</span>
+    <span class="stat-label">QS & site engineers globally</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-num">$13T</span>
+    <span class="stat-label">Global construction output</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-num">~0</span>
+    <span class="stat-label">Screen-aware AI tools for site work</span>
+  </div>
+</div>
+
+<p>HeyClicky is already seeing traction with doctors, founders, and creators — professionals who work on screens with high cognitive load. Construction engineers fit exactly that profile. The difference is nobody has gone after them yet.</p>
+<p>And critically — this market is strongest in Africa, the Middle East, and South/Southeast Asia. Markets that are invisible from San Francisco but represent the majority of global construction activity.</p>
+```
+
+  </div>
+
+  <!-- Section 3: The Use Case -->
+
+  <div class="section">
+    <div class="section-label">03 — The Use Case</div>
+    <h2>Clicky as your site documentation co-pilot</h2>
+
+```
+<p>Here is the exact workflow HeyClicky would transform:</p>
+
+<div class="flow">
+  <div class="flow-step">
+    <div class="step-line"></div>
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <div class="step-title">End of casting — data is scattered across phone notes</div>
+      <p class="step-desc">Engineer has notes like: "Col C3 × 4, 300×300, floor 2. Beam B7 × 2, 230×450." Messy. Informal. Accurate.</p>
+    </div>
+  </div>
+  <div class="flow-step active">
+    <div class="step-line"></div>
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <div class="step-title">Engineer opens laptop — Clicky sees the screen</div>
+      <p class="step-desc">Clicky sees the phone notes or typed raw data on screen. Engineer says: <em>"Clicky, turn this into a daily casting report."</em></p>
+    </div>
+  </div>
+  <div class="flow-step active">
+    <div class="step-line"></div>
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <div class="step-title">Clicky generates the structured report instantly</div>
+      <p class="step-desc">Formatted table: element type, grid reference, dimensions, quantity, floor level, date. Professional. Ready to submit.</p>
+    </div>
+  </div>
+  <div class="flow-step active">
+    <div class="step-line"></div>
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <div class="step-title">Multiple supervisors? One command.</div>
+      <p class="step-desc"><em>"Clicky, now reformat this for the Project Manager's weekly summary."</em> Same data. Different structure. Done in seconds.</p>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <div class="step-title">Cumulative tracking over time</div>
+      <p class="step-desc">Clicky agent tracks totals across days — total columns cast this week, variance against programme, running material tally.</p>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- Section 4: Scenario -->
+
+  <div class="section">
+    <div class="section-label">04 — In Practice</div>
+    <h2>What it actually sounds like</h2>
+
+```
+<div class="scenario">
+  <div class="scenario-header">
+    <span class="dot"></span>
+    Live scenario — site office, 6pm after casting
+  </div>
+  <div class="scenario-body">
+    <div class="dialogue">
+      <div class="line">
+        <span class="speaker user">Engineer</span>
+        <div class="bubble">"Clicky, I've got today's casting notes open. Col A1 to A4, 300×300, ground floor. Two beams on gridline 3, 230×450. Three staircase waist slabs. Generate me a casting record."</div>
+      </div>
+      <div class="line">
+        <span class="speaker clicky">Clicky</span>
+        <div class="bubble clicky-bubble">Generated. Daily Casting Record — [Date]. 4 columns, Grid A1–A4, 300×300mm, GF. 2 beams, Gridline 3, 230×450mm, GF. 3 staircase waist slabs. Total concrete elements: 9. Want me to add this to your running weekly total?</div>
+      </div>
+      <div class="line">
+        <span class="speaker user">Engineer</span>
+        <div class="bubble">"Yes. Also make a separate version for the Resident Engineer — he wants it with remarks column and a footer."</div>
+      </div>
+      <div class="line">
+        <span class="speaker clicky">Clicky</span>
+        <div class="bubble clicky-bubble">Done. Two versions ready — standard and RE format with remarks column and project footer. Shall I save both?</div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- Section 5: Feature Breakdown -->
+
+  <div class="section">
+    <div class="section-label">05 — Feature Breakdown</div>
+    <h2>What needs to be built</h2>
+
+```
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="feature-icon">🗣️</div>
+    <div class="feature-title">Voice-to-report</div>
+    <p class="feature-desc">Dictate raw site notes out loud. Clicky structures them into a formatted casting or material record automatically.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">📋</div>
+    <div class="feature-title">Multi-format output</div>
+    <p class="feature-desc">Same underlying data → reformatted per supervisor preference. Engineer defines each supervisor's format once.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">📊</div>
+    <div class="feature-title">Cumulative tracking agent</div>
+    <p class="feature-desc">Background agent accumulates daily records into weekly and monthly summaries. Flags variance against programme.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">📐</div>
+    <div class="feature-title">Drawing-aware Q&A</div>
+    <p class="feature-desc">Clicky sees a structural PDF open on screen. Engineer asks "how many columns on this floor?" — Clicky reads and answers.</p>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- Section 6: Why Me -->
+
+  <div class="section">
+    <div class="section-label">06 — Why I'm Sending This</div>
+    <h2>What I bring that nobody in SF does</h2>
+
+```
+<div class="quote-block">
+  <p>"I have stood on a construction site in 35°C heat, phone in hand, capturing quantities of freshly cast concrete because there was no better system. I have gone back to a site office and rewritten the same data four different ways for four different supervisors before I could go home. I know this problem from the inside."</p>
+  <div class="attribution">— Wick, BTech Quantity Surveying, FUTMinna | Internship: Al-Mansour Engineering & Ministry of Works, Nigeria</div>
+</div>
+
+<p>I'm not a senior engineer. I don't have a polished portfolio. But Farza said in 2026 he indexes on ideas — and this idea comes with something most pitches don't: direct, lived experience of the exact pain the product would solve.</p>
+<p>I'm also an active forex and crypto trader with a working knowledge of chart analysis, risk management, and prop firm frameworks — which opens a second vertical (Clicky for traders) that I'm happy to brief separately.</p>
+```
+
+  </div>
+
+  <!-- Author / CTA -->
+
+  <div class="author-block">
+    <div>
+      <div class="author-name">Wick</div>
+      <div class="author-meta">
+        BTech Quantity Surveying — FUTMinna<br>
+        Internship: Al-Mansour Engineering & Contracting Ltd<br>
+        Internship: Ministry of Works & Infrastructural Development<br>
+        Active trader — XAUUSD / BTCUSD
+      </div>
+    </div>
+None
+  </div>
+
+</div>
+</body>
+</html>
